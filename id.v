@@ -76,10 +76,6 @@ module id(
             reg2_addr_o <= `RegNumLog2'b0;
             wreg_o <= `WriteDisa;
             waddr_o <= `NOPRegAddr;        //宏定义：默认地址为空时
-
-            reg1_o <= `RegWidth'b0;     //TODO:书上没有对reg_o进行处理，为什么呢？
-            reg2_o <= `RegWidth'b0;
-
             aluop_o <= `EXE_NOP_OP;
             alusel_o <= `EXE_RES_NOP;
             imm <= 32'h0;
@@ -103,7 +99,7 @@ module id(
                     aluop_o <= `EXE_OR_OP;
                     alusel_o <= `EXE_RES_LOGIC;
                     //读取数据
-                    reg1_read_o <= `ReadEna;
+                    reg1_read_o <= `ReadEna;    //ori操作只需要rs
                     // reg1_o <= reg1_data_i;  书上读取数据是在另一个always 里面进行的，因为敏感列表不一样，并且那边要时刻准备着运行，所以这样做
                     reg2_read_o <= `ReadDisa;
                     imm <= {16'b0,inst_i[15:0]};
